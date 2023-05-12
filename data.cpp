@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <iostream>
 #include "data.h"
+#pragma warning (disable : 4996)
 
 void* MY_STUDENT_Init(char* llastname, int yyear, enum courses ccourse)
 /*==========================================================
@@ -30,4 +31,16 @@ Zwalniamy pamiec
 void* MY_STUDENT_Push(char* llastname, int yyear, enum courses ccourse)
 {
 	return MY_STUDENT_Init(llastname, yyear, ccourse);
+}
+
+void MY_STUDENT_Print(void* ptr)
+{
+	MY_STUDENT* p = (MY_STUDENT*)ptr;
+	
+	if (p)
+	{
+		printf("nazwisko    : %s\n", p->lastname);
+		printf("rok urodzenia : %d\n", p->year);
+		printf("kierunek studiów    : %d\n", p->course); // TO DO: get_course_name 
+	}
 }

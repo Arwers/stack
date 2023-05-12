@@ -130,10 +130,14 @@
     <ClCompile Include="interface.cpp" />
     <ClCompile Include="data.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="stack.cpp" />
+    <ClCompile Include="stdafx.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="interface.h" />
     <ClInclude Include="data.h" />
+    <ClInclude Include="stack.h" />
+    <ClInclude Include="stdafx.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

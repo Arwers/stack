@@ -3,6 +3,8 @@
 #include "stack.h"
 #include "interface.h"
 
+#pragma warning (disable : 4996)
+
 const char* strtab[] =
 {
 	"0 - push",			 //INTERF_PUSH
@@ -29,9 +31,16 @@ void push()
 	printf("nazwisko, rok urodzenia, kierunek\n");
 	scanf("%s", lastname);
 	scanf("%d", &year);
-	scanf("%s", &course);
+	scanf("%d", &course);
 
 	void* pdat = MY_STUDENT_Push(lastname, year, course);
 	if (!MY_STACK_Push(pdat))
 		printf("push error\n");
+}
+
+void pop()
+{
+	MY_STACK tmp = MY_STACK_Pop();
+	MY_STUDENT_Print(tmp.pData);
+	MY_STUDENT_Free(tmp.pData);
 }

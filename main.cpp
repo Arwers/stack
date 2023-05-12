@@ -1,14 +1,15 @@
-#define _CRT_SECURE_NO_WARNINGS
-#include <iostream>
+#include "stdafx.h"
+#include <stdlib.h>
+#include <stdio.h>
 #include "interface.h"
 #include "data.h"
 #include "stack.h"
+#pragma warning (disable : 4996)
+
 int main()
 {
 	MY_STACK_Init(MY_STUDENT_Free);
-	int opt = 0;
-
-	size_t op = 0;
+	int op = 0;
 	while (op >= INTERF_PUSH && op <= INTERF_STOP)
 	{
 		menu();
@@ -18,7 +19,7 @@ int main()
 		{
 		case INTERF_PUSH: push();
 			break;
-		case INTERF_POP: //pop();
+		case INTERF_POP: pop();
 			break;
 		case INTERF_CLEAR: //clear();
 			break;

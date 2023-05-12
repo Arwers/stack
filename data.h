@@ -18,4 +18,5 @@ enum courses {
 void* MY_STUDENT_Init(char* llastname, int yyear, enum courses ccourse);
 void MY_STUDENT_Free(void* ptr);
 void* MY_STUDENT_Push(char* llastname, int yyear, enum courses ccourse);
+void MY_STUDENT_Print(void* ptr);
 #endif

@@ -34,3 +34,22 @@ MY_STACK* MY_STACK_Push(void* pdat)
 
 	return current;
 }
+
+MY_STACK MY_STACK_Pop() 
+{
+	MY_STACK rv;
+	if(!first)
+	{
+		printf("Stos jest pusty");
+		rv.pData = NULL;
+		rv.next = NULL;
+	}
+	else
+	{
+		MY_STACK* next = first->next;
+		rv.pData = first->pData;
+		free(first);
+		first = next;
+	}
+	return rv;
+}

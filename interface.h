@@ -14,4 +14,5 @@ enum MY_INTERF_EN
 
 void menu();
 void push();
+void pop();
 #endif
