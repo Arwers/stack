@@ -127,6 +127,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="errors.cpp" />
     <ClCompile Include="interface.cpp" />
     <ClCompile Include="data.cpp" />
     <ClCompile Include="main.cpp" />
@@ -134,6 +135,7 @@
     <ClCompile Include="stdafx.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="errors.h" />
     <ClInclude Include="interface.h" />
     <ClInclude Include="data.h" />
     <ClInclude Include="stack.h" />

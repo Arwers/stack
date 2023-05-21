@@ -5,7 +5,7 @@
 #include "data.h"
 #include "stack.h"
 #include "interface.h"
-
+#include "errors.h"
 #pragma warning (disable : 4996)
 
 const char* strtab[] =
@@ -14,7 +14,9 @@ const char* strtab[] =
 	"1 - pop",			 //INTERF_POP
 	"2 - clear",		 //INTERF_CLEAR
 	"3 - find",			 //INTERF_FIND_LASTNAME
-	"4 - finish"         //INTERF_STOP
+	"4 - load",
+	"5 - save",
+	"6 - finish"         //INTERF_STOP
 };
 
 const char* vartab[] =
@@ -67,7 +69,8 @@ void find()
 	for (size_t i = 0; i < DATA_VAR_TOT; ++i) printf("%s\n", vartab[i]);
 	scanf_s("%d", &op);
 	
-	switch (op) {
+	switch (op) 
+	{
 	case DATA_VAR_LASTNAME: find_lastname();
 		break;
 	case DATA_VAR_YEAR: find_year();
@@ -82,15 +85,27 @@ void find()
 
 void find_lastname()
 {
-	char str[128];
+	char str[256];
 	printf("Dane: \n");
 	scanf_s("%s", str, sizeof(str));
-	MY_STUDENT searchDat;
-	memset(&searchDat, 0, sizeof(MY_STUDENT));
-	strcpy_s(searchDat.lastname, sizeof(searchDat.lastname), str);
+	MY_STUDENT* searchDat = (MY_STUDENT*)malloc(sizeof(MY_STUDENT));
+	if(!searchDat)
+	{
+		print_error(ALLOC_ERROR);
+		return;
+	}
+	memset(searchDat, 0, sizeof(MY_STUDENT));
 
-	void *pDat = MY_STACK_Search(&searchDat, MY_DATA_SearchLastName, 1); //make a first search
+	size_t size = strlen(str) + 1;
+	searchDat->lastname = (char*)malloc(size * sizeof(char));
+	if (!searchDat->lastname)
+	{
+		print_error(ALLOC_ERROR);
+	}
 
+	strcpy(searchDat->lastname, str);
+
+	void *pDat = MY_STACK_Search(searchDat, MY_DATA_SearchLastName, 1); //make a first search
 	if (pDat)
 	{
 		printf("found : \n");
@@ -163,3 +178,6 @@ void find_course()
 		}
 	}
 }
+
+void load(){}
+void save(){}

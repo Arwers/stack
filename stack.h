@@ -1,5 +1,5 @@
-#ifndef MY_STACK___H
-#define MY_STACK___H
+#ifndef STACK___H
+#define STACK___H
 
 struct MY_STACK
 {

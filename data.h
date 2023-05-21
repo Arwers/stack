@@ -1,5 +1,5 @@
-#ifndef MY_STUDENT_ADFGRETW__H
-#define MY_STUDENT_ADFGRETW__H
+#ifndef DATA___H
+#define DATA___H
 
 struct MY_STUDENT
 {

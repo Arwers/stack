@@ -27,6 +27,10 @@ int main()
 			break;
 		case INTERF_STOP: clear();
 			return 0;
+		case INTERF_LOAD: //load();
+			break;
+		case INTERF_SAVE: //save();
+			return 0;
 		default:
 			printf("nieuznawany kod operacji\n");
 		};

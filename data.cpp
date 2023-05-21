@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <iostream>
 #include "data.h"
+#include "errors.h"
 #pragma warning (disable : 4996)
 
 void* MY_DATA_Init(char* llastname, int yyear, enum COURSES ccourse)
@@ -9,15 +10,27 @@ Alokujemy pamiec dla obiektu MY_STUDENT i wypelniamy dane
 ===========================================================*/
 {
 	MY_STUDENT* pdat = (MY_STUDENT*)malloc(sizeof(MY_STUDENT));
+	if (!pdat)
+	{
+		print_error(ALLOC_ERROR);
+		return NULL;
+	}
+
 	if (pdat)
 	{
 		size_t size = strlen(llastname) + 1;
 		pdat->lastname = (char*)malloc(size * sizeof(char));
-		//error handling
+		if (!pdat->lastname)
+		{
+			print_error(ALLOC_ERROR);
+			return NULL;
+		}
+
 		strcpy_s(pdat->lastname, size, llastname);
 		pdat->course = ccourse;
 		pdat->year = yyear;
 	}
+
 	return (void*)(pdat);
 }
 

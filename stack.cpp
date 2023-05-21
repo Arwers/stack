@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "stack.h"
-
+#include "errors.h"
 
 static MY_STACK* first = NULL;   // Wskaznik do elementu na szczycie stosu
 FreeData ptr_free_dat;           // Deklaracja wskaznika do funkcji typu FreeData
@@ -17,8 +17,10 @@ MY_STACK* MY_STACK_Push(void* pdat)
 	// alokujemy pamiec dla nowego elementu kolejki
 	MY_STACK* current = (MY_STACK*)malloc(sizeof(MY_STACK));
 	if (!current)
+	{
+		print_error(ALLOC_ERROR);
 		return NULL;
-
+	}
 	// je¿eli jest "najnizszym" elementem stosu to do next przypisujemy NULL
 	if (!first)
 	{
@@ -40,7 +42,7 @@ MY_STACK MY_STACK_Pop()
 	MY_STACK rv;
 	if(!first)
 	{
-		printf("Stos jest pusty\n");
+		print_error(STACK_UNDERFLOW);
 		rv.pData = NULL;
 		rv.next = NULL;
 	}
