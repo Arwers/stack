@@ -3,9 +3,10 @@
 
 struct MY_STUDENT
 {
-	char lastname[64];      // Nazwisko studenta
+	char* lastname;      // Nazwisko studenta
 	int year;            // Rok urodzenia
 	enum COURSES course; // Kierunek studiow
+	size_t size;		 // Wielkosc nazwiska
 };
 
 enum COURSES {

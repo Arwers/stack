@@ -11,7 +11,10 @@ Alokujemy pamiec dla obiektu MY_STUDENT i wypelniamy dane
 	MY_STUDENT* pdat = (MY_STUDENT*)malloc(sizeof(MY_STUDENT));
 	if (pdat)
 	{
-		strcpy(pdat->lastname, llastname);
+		size_t size = strlen(llastname) + 1;
+		pdat->lastname = (char*)malloc(size * sizeof(char));
+		//error handling
+		strcpy_s(pdat->lastname, size, llastname);
 		pdat->course = ccourse;
 		pdat->year = yyear;
 	}
@@ -24,8 +27,13 @@ Zwalniamy pamiec
 ===========================================================*/
 {
 	MY_STUDENT* pDat = (MY_STUDENT*)ptr;
-	if (pDat)
+	if (pDat) {
+		free(pDat->lastname);
+		pDat->lastname = NULL;
+
 		free(pDat);
+		pDat = NULL;
+	}
 }
 
 void* MY_DATA_Push(char* llastname, int yyear, enum COURSES ccourse)
