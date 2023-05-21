@@ -13,4 +13,6 @@ typedef int (CompData)(void* pcurData, void* pSearchData); //Definicja typu: wsk
 void MY_STACK_Init(FreeData pFreeDat);
 MY_STACK* MY_STACK_Push(void* pdat);
 MY_STACK MY_STACK_Pop();
+void MY_STACK_free();
+void* MY_STACK_Search(void* pSearchDat, CompData ptr_comp_fun, int FirstEntry);
 #endif

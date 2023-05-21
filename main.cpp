@@ -8,12 +8,12 @@
 
 int main()
 {
-	MY_STACK_Init(MY_STUDENT_Free);
+	MY_STACK_Init(MY_DATA_Free);
 	int op = 0;
 	while (op >= INTERF_PUSH && op <= INTERF_STOP)
 	{
 		menu();
-		scanf("%d", &op);
+		scanf_s("%d", &op);
 
 		switch (op)
 		{
@@ -21,11 +21,11 @@ int main()
 			break;
 		case INTERF_POP: pop();
 			break;
-		case INTERF_CLEAR: //clear();
+		case INTERF_CLEAR: clear();
 			break;
-		case INTERF_FIND_LASTNAME: //find_lastname();
+		case INTERF_FIND: find();
 			break;
-		case INTERF_STOP: //clear();
+		case INTERF_STOP: clear();
 			return 0;
 		default:
 			printf("nieuznawany kod operacji\n");

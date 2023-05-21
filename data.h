@@ -3,20 +3,24 @@
 
 struct MY_STUDENT
 {
-	char lastname[64];    // Nazwisko studenta
+	char lastname[64];      // Nazwisko studenta
 	int year;            // Rok urodzenia
-	enum courses course; // Kierunek studiow
+	enum COURSES course; // Kierunek studiow
 };
 
-enum courses {
+enum COURSES {
 	informatyka,
 	matematyka,
 	architektura,
 	budownictwo
 };
 
-void* MY_STUDENT_Init(char* llastname, int yyear, enum courses ccourse);
-void MY_STUDENT_Free(void* ptr);
-void* MY_STUDENT_Push(char* llastname, int yyear, enum courses ccourse);
-void MY_STUDENT_Print(void* ptr);
+
+void *MY_DATA_Init(char *llastname, int yyear, enum COURSES ccourse);
+void MY_DATA_Free(void *ptr);
+void* MY_DATA_Push(char *llastname, int yyear, enum COURSES ccourse);
+void MY_DATA_Print(void *ptr);
+int MY_DATA_SearchLastName(void *pCurData, void *pSearchData);
+int MY_DATA_SearchYear(void *pCurData, void *pSearchData);
+int MY_DATA_SearchCourse(void *pCurData, void *pSearchData);
 #endif
