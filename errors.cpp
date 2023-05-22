@@ -8,7 +8,7 @@ const char* errormess[] =
 	"E MEMORY ALLOCATION ERROR",
 	"W STACK UNDERFLOW",
 	"E FATAL ERROR",
-	"E TYPE ERROR"
+	"W INVALID INPUT ERROR"
 };
 
 void print_error(enum ERROR_TYPES error)

@@ -58,8 +58,7 @@ void push()
 	printf("Rok urodzenia: ");
 	if (!scanf_s("%d", &year) || getchar() != '\n' )
 	{
-		print_error(TYPE_ERROR);
-
+		print_error(INVALID_INPUT_ERROR);
 		while (getchar() != '\n') {}
 		return;
 	}
@@ -68,10 +67,9 @@ void push()
 	printf("Kierunek studiow: ");
 	if(!scanf_s("%d", &course) || getchar() != '\n')
 	{
-		print_error(TYPE_ERROR);
+		print_error(INVALID_INPUT_ERROR);
 		while (getchar() != '\n') {}
 		return;
-
 	}
 
 	void* pdat = MY_DATA_Push(lastname, year, course);
