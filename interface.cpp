@@ -56,11 +56,23 @@ void push()
 	scanf_s("%s", lastname, sizeof(lastname));
 
 	printf("Rok urodzenia: ");
-	scanf_s("%d", &year);
+	if (!scanf_s("%d", &year) || getchar() != '\n' )
+	{
+		print_error(TYPE_ERROR);
+
+		while (getchar() != '\n') {}
+		return;
+	}
 
 	print_courses();
 	printf("Kierunek studiow: ");
-	scanf_s("%d", &course);
+	if(!scanf_s("%d", &course) || getchar() != '\n')
+	{
+		print_error(TYPE_ERROR);
+		while (getchar() != '\n') {}
+		return;
+
+	}
 
 	void* pdat = MY_DATA_Push(lastname, year, course);
 	if (!MY_STACK_Push(pdat))
