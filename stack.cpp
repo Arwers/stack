@@ -52,6 +52,7 @@ MY_STACK MY_STACK_Pop()
 		rv.pData = first->pData;
 		free(first);
 		first = next;
+		printf("Pobrano element\n");
 	}
 	return rv;
 }

@@ -10,10 +10,14 @@ struct MY_STUDENT
 };
 
 enum COURSES {
-	informatyka,
-	matematyka,
-	architektura,
-	budownictwo
+	INFORMATYKA,
+	MATEMATYKA,
+	ARCHITEKTURA,
+	BUDOWNICTWO,
+	TRANSPORT,
+	ENERGETYKA,
+	BIOTECHNOLOGIA,
+	COURSES_TOT
 };
 
 
@@ -24,4 +28,5 @@ void MY_DATA_Print(void *ptr);
 int MY_DATA_SearchLastName(void *pCurData, void *pSearchData);
 int MY_DATA_SearchYear(void *pCurData, void *pSearchData);
 int MY_DATA_SearchCourse(void *pCurData, void *pSearchData);
+void MY_DATA_PrintCourse(enum COURSES course);
 #endif

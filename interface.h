@@ -32,4 +32,5 @@ void find_year();
 void find_course();
 void load();
 void save();
+void print_courses();
 #endif

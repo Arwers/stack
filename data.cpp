@@ -2,6 +2,7 @@
 #include <iostream>
 #include "data.h"
 #include "errors.h"
+#include "interface.h"
 #pragma warning (disable : 4996)
 
 void* MY_DATA_Init(char* llastname, int yyear, enum COURSES ccourse)
@@ -60,9 +61,9 @@ void MY_DATA_Print(void* ptr)
 	
 	if (p)
 	{
-		printf("\nnazwisko    : %s\n", p->lastname);
-		printf("rok urodzenia : %d\n", p->year);
-		//printf("kierunek studiów    : %s\n", COURSES{ p->course }); TO DO: get_course_name 
+		printf("Nazwisko: %s\n", p->lastname);
+		printf("Rok urodzenia: %d\n", p->year);
+		MY_DATA_PrintCourse(p->course);
 	}
 }
 
@@ -97,4 +98,28 @@ int MY_DATA_SearchCourse(void* pCurData, void* pSearchData)
 		return 1;
 
 	return 0;
+}
+
+void MY_DATA_PrintCourse(enum COURSES course)
+{
+	printf("Kierunek studiow: ");
+	switch (course) 
+	{
+	case INFORMATYKA: printf("informatyka\n");
+		break;
+	case MATEMATYKA: printf("matematyka\n");
+		break;
+	case ARCHITEKTURA: printf("architektura\n");
+		break;
+	case BUDOWNICTWO: printf("budownictwo\n");
+		break;
+	case TRANSPORT: printf("transport\n");
+		break;
+	case ENERGETYKA: printf("energetyka\n");
+		break;
+	case BIOTECHNOLOGIA: printf("biotechnologia\n");
+		break;
+	default: printf("nieznany kierunek\n");
+		break;
+	}
 }

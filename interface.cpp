@@ -21,9 +21,20 @@ const char* strtab[] =
 
 const char* vartab[] =
 {
-	"0	-	lastname",
-	"1	-	year",
-	"2	-	course"
+	"0 - nazwisko",
+	"1 - rok urodzenia",
+	"2 - kierunek studiow"
+};
+
+const char* crstab[] =
+{
+	"0 - informatyka",
+	"1 - matematyka",
+	"2 - architektura",
+	"3 - budownictwo",
+	"4 - transport",
+	"5 - energetyka",
+	"6 - biotechnologia",
 };
 
 void menu()
@@ -40,9 +51,15 @@ void push()
 	char lastname[64];
 	int year;
 	enum COURSES course;
-	printf("nazwisko, rok urodzenia, kierunek\n");
+
+	printf("Nazwisko: ");
 	scanf_s("%s", lastname, sizeof(lastname));
+
+	printf("Rok urodzenia: ");
 	scanf_s("%d", &year);
+
+	print_courses();
+	printf("Kierunek studiow: ");
 	scanf_s("%d", &course);
 
 	void* pdat = MY_DATA_Push(lastname, year, course);
@@ -67,8 +84,8 @@ void find()
 	int op;
 	printf("Wybierz kryterium\n");
 	for (size_t i = 0; i < DATA_VAR_TOT; ++i) printf("%s\n", vartab[i]);
+	printf("Operacja: ");
 	scanf_s("%d", &op);
-	
 	switch (op) 
 	{
 	case DATA_VAR_LASTNAME: find_lastname();
@@ -77,16 +94,16 @@ void find()
 		break;
 	case DATA_VAR_COURSE: find_course();
 		break;
-	default:
-		printf("Takie kryterium nie istnieje\n");
+	default: printf("Takie kryterium nie istnieje\n");
 	}
+
 	return;
 }
 
 void find_lastname()
 {
 	char str[256];
-	printf("Dane: \n");
+	printf("Szukane nazwisko: \n");
 	scanf_s("%s", str, sizeof(str));
 	MY_STUDENT* searchDat = (MY_STUDENT*)malloc(sizeof(MY_STUDENT));
 	if(!searchDat)
@@ -108,7 +125,7 @@ void find_lastname()
 	void *pDat = MY_STACK_Search(searchDat, MY_DATA_SearchLastName, 1); //make a first search
 	if (pDat)
 	{
-		printf("found : \n");
+		printf("Znaleziono : \n");
 		MY_DATA_Print(pDat);
 	}
 
@@ -117,7 +134,7 @@ void find_lastname()
 		pDat = MY_STACK_Search(&searchDat, MY_DATA_SearchLastName, 0);
 		if (pDat)
 		{
-			printf("found : \n");
+			printf("Znaleziono : \n");
 			MY_DATA_Print(pDat);
 		}
 	}
@@ -126,7 +143,7 @@ void find_lastname()
 void find_year()
 {
 	int year;
-	printf("Dane: \n");
+	printf("Szukany rok urodzenia: \n");
 	scanf_s("%d", &year);
 	MY_STUDENT searchDat;
 	memset(&searchDat, 0, sizeof(MY_STUDENT));
@@ -136,7 +153,7 @@ void find_year()
 
 	if (pDat)
 	{
-		printf("found : \n");
+		printf("Znaleziono : \n");
 		MY_DATA_Print(pDat);
 	}
 
@@ -145,7 +162,7 @@ void find_year()
 		pDat = MY_STACK_Search(&searchDat, MY_DATA_SearchYear, 0);
 		if (pDat)
 		{
-			printf("found : \n");
+			printf("Znaleziono : \n");
 			MY_DATA_Print(pDat);
 		}
 	}
@@ -153,8 +170,9 @@ void find_year()
 
 void find_course()
 {
+	print_courses();
 	enum COURSES course;
-	printf("Dane: \n");
+	printf("Szukany kurs: \n");
 	scanf_s("%d", &course);
 	MY_STUDENT searchDat;
 	memset(&searchDat, 0, sizeof(MY_STUDENT));
@@ -164,7 +182,7 @@ void find_course()
 
 	if (pDat)
 	{
-		printf("found : \n");
+		printf("Znaleziono : \n");
 		MY_DATA_Print(pDat);
 	}
 
@@ -173,9 +191,18 @@ void find_course()
 		pDat = MY_STACK_Search(&searchDat, MY_DATA_SearchCourse, 0);
 		if (pDat)
 		{
-			printf("found : \n");
+			printf("Znaleziono : \n");
 			MY_DATA_Print(pDat);
 		}
+	}
+}
+
+void print_courses()
+{
+	printf("Dostepne kierunki studiow: \n");
+	for (size_t i = 0; i < COURSES_TOT;++i)
+	{
+		printf("%s\n", crstab[i]);
 	}
 }
 

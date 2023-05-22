@@ -13,6 +13,7 @@ int main()
 	while (op >= INTERF_PUSH && op <= INTERF_STOP)
 	{
 		menu();
+		printf("Operacja: ");
 		scanf_s("%d", &op);
 
 		switch (op)
@@ -34,6 +35,7 @@ int main()
 		default:
 			printf("nieuznawany kod operacji\n");
 		};
+		printf("\n");
 	}
 
 	return 0;
