@@ -12,5 +12,5 @@ enum ERROR_TYPES {
 };
 
 void print_error(enum ERROR_TYPES error);
-
+void MyExit(FILE* pft, __int64* fdesc);
 #endif

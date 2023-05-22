@@ -86,7 +86,7 @@ void pop()
 
 void clear()
 {
-	MY_STACK_free();
+	MY_STACK_Free();
 }
 
 void find()
@@ -216,5 +216,17 @@ void print_courses()
 	}
 }
 
-void load(){}
-void save(){}
+void load()
+{
+	//char file[64];
+	//printf("Nazwa pliku wejsciowego z rozszerzeniem: ");
+	//scanf_s("%s", file);
+	MY_STACK_Load();
+}
+void save()
+{
+	//char file[64];
+	//printf("Nazwa pliku wyjsciowego z rozszerzeniem: ");
+	//scanf_s("%s", file);
+	MY_STACK_Save();
+}

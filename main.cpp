@@ -8,7 +8,7 @@
 
 int main()
 {
-	MY_STACK_Init(MY_DATA_Free);
+	MY_STACK_Init(MY_DATA_Free, MY_DATA_Save, MY_DATA_Load);
 	int op = 0;
 	while (op >= INTERF_PUSH && op <= INTERF_STOP)
 	{
@@ -28,10 +28,10 @@ int main()
 			break;
 		case INTERF_STOP: clear();
 			return 0;
-		case INTERF_LOAD: //load();
+		case INTERF_LOAD: load();
 			break;
-		case INTERF_SAVE: //save();
-			return 0;
+		case INTERF_SAVE: save();
+			break;
 		default:
 			printf("nieuznawany kod operacji\n");
 		};

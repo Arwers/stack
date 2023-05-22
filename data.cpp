@@ -6,9 +6,6 @@
 #pragma warning (disable : 4996)
 
 void* MY_DATA_Init(char* llastname, int yyear, enum COURSES ccourse)
-/*==========================================================
-Alokujemy pamiec dla obiektu MY_STUDENT i wypelniamy dane
-===========================================================*/
 {
 	MY_STUDENT* pdat = (MY_STUDENT*)malloc(sizeof(MY_STUDENT));
 	if (!pdat)
@@ -21,6 +18,8 @@ Alokujemy pamiec dla obiektu MY_STUDENT i wypelniamy dane
 	{
 		size_t size = strlen(llastname) + 1;
 		pdat->lastname = (char*)malloc(size * sizeof(char));
+		pdat->size = size;
+
 		if (!pdat->lastname)
 		{
 			print_error(ALLOC_ERROR);
@@ -36,9 +35,6 @@ Alokujemy pamiec dla obiektu MY_STUDENT i wypelniamy dane
 }
 
 void MY_DATA_Free(void* ptr)
-/*==========================================================
-Zwalniamy pamiec
-===========================================================*/
 {
 	MY_STUDENT* pDat = (MY_STUDENT*)ptr;
 	if (pDat) {
@@ -122,4 +118,40 @@ void MY_DATA_PrintCourse(enum COURSES course)
 	default: printf("nieznany kierunek\n");
 		break;
 	}
+}
+
+int MY_DATA_Save(void* ptr, FILE* file) 
+{
+	MY_STUDENT* pData = (MY_STUDENT*)ptr;
+	if (fwrite(pData, sizeof(MY_STUDENT), 1, file) != 1)
+		return 0;
+
+	if (fwrite(pData->lastname, pData->size * sizeof(char), 1, file) != 1)
+		return 0;
+
+	return 1;
+}
+void* MY_DATA_Load(FILE* file) 
+{
+	MY_STUDENT* pData = (MY_STUDENT*)malloc(sizeof(MY_STUDENT));
+	if(!pData)
+	{
+		print_error(ALLOC_ERROR);
+	}
+	memset(pData, 0, sizeof(MY_STUDENT));
+
+	if (fread(pData, sizeof(MY_STUDENT), 1, file) != 1)
+		return 0;
+
+	pData->lastname = (char*)malloc(pData->size * sizeof(char));
+	if (!pData->lastname)
+	{
+		print_error(ALLOC_ERROR);
+	}
+
+	if (fread(pData->lastname, pData->size * sizeof(char), 1, file) != 1)
+		return 0;
+
+	return MY_DATA_Push(pData->lastname, pData->year, pData->course);
+
 }
