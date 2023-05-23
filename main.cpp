@@ -8,9 +8,9 @@
 
 int main()
 {
-	MY_STACK_Init(MY_DATA_Free, MY_DATA_Save, MY_DATA_Load);
+	MY_STACK_Init(MY_DATA_Free, MY_DATA_Save, MY_DATA_Load, MY_DATA_Print);
 	int op = 0;
-	while (op >= INTERF_PUSH && op <= INTERF_STOP)
+	while (op >= INTERF_PRINT && op < INTERF_TOT)
 	{
 		menu();
 		printf("Operacja: ");
@@ -18,6 +18,8 @@ int main()
 
 		switch (op)
 		{
+		case INTERF_PRINT: print_stack();
+			break;
 		case INTERF_PUSH: push();
 			break;
 		case INTERF_POP: pop();
@@ -34,6 +36,8 @@ int main()
 			break;
 		default:
 			printf("nieuznawany kod operacji\n");
+			op = 0;
+			break;
 		};
 		printf("\n");
 	}

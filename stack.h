@@ -11,7 +11,10 @@ typedef void (*FreeData)(void* pdat);                      //Definicja typu: wsk
 typedef int (CompData)(void* pcurData, void* pSearchData); //Definicja typu: wskaznik do funkcji z prototypem int  NazwaFunkcji(void *, void *);
 typedef int (*SaveData)(void* pcurData, FILE* file);
 typedef void* (*LoadData)(FILE* file);
-void MY_STACK_Init(FreeData pFreeDat, SaveData pSaveDat, LoadData pLoadDat);
+typedef void (*PrintData)(void* pdat);
+
+void MY_STACK_Print();
+void MY_STACK_Init(FreeData pFreeDat, SaveData pSaveDat, LoadData pLoadDat, PrintData pPrintDat);
 MY_STACK* MY_STACK_Push(void* pdat);
 MY_STACK MY_STACK_Pop();
 void MY_STACK_Free();

@@ -10,13 +10,14 @@
 
 const char* strtab[] =
 {
-	"0 - push",			 //INTERF_PUSH
-	"1 - pop",			 //INTERF_POP
-	"2 - clear",		 //INTERF_CLEAR
-	"3 - find",			 //INTERF_FIND_LASTNAME
-	"4 - load",
-	"5 - save",
-	"6 - finish"         //INTERF_STOP
+	"0 - print",		// INTERF_PRINT
+	"1 - push",			// INTERF_PUSH
+	"2 - pop",			// INTERF_POP
+	"3 - clear",		// INTERF_CLEAR
+	"4 - find",			// INTERF_FIND_LASTNAME
+	"5 - load",			// INTERF_LOAD
+	"6 - save",			// INTERF_SAVE
+	"7 - finish"        // INTERF_STOP
 };
 
 const char* vartab[] =
@@ -46,6 +47,11 @@ void menu()
 	}
 }
 
+void print_stack()
+{
+	MY_STACK_Print();
+}
+
 void push()
 {
 	char lastname[64];
@@ -59,7 +65,7 @@ void push()
 	if (!scanf_s("%d", &year) || getchar() != '\n' )
 	{
 		print_error(INVALID_INPUT_ERROR);
-		while (getchar() != '\n') {}
+		while (getchar() != '\n') {} // czysczenie stdin po blednym wprowadzeniu danych
 		return;
 	}
 
@@ -113,8 +119,9 @@ void find()
 void find_lastname()
 {
 	char str[256];
-	printf("Szukane nazwisko: \n");
+	printf("Szukane nazwisko: ");
 	scanf_s("%s", str, sizeof(str));
+	printf("\n");
 	MY_STUDENT* searchDat = (MY_STUDENT*)malloc(sizeof(MY_STUDENT));
 	if(!searchDat)
 	{
@@ -135,8 +142,9 @@ void find_lastname()
 	void *pDat = MY_STACK_Search(searchDat, MY_DATA_SearchLastName, 1); //make a first search
 	if (pDat)
 	{
-		printf("Znaleziono : \n");
+		printf("Znaleziono: \n");
 		MY_DATA_Print(pDat);
+		printf("\n");
 	}
 
 	while (pDat)
@@ -144,8 +152,9 @@ void find_lastname()
 		pDat = MY_STACK_Search(&searchDat, MY_DATA_SearchLastName, 0);
 		if (pDat)
 		{
-			printf("Znaleziono : \n");
+			printf("Znaleziono: \n");
 			MY_DATA_Print(pDat);
+			printf("\n");
 		}
 	}
 }
@@ -153,8 +162,9 @@ void find_lastname()
 void find_year()
 {
 	int year;
-	printf("Szukany rok urodzenia: \n");
+	printf("Szukany rok urodzenia: ");
 	scanf_s("%d", &year);
+	printf("\n");
 	MY_STUDENT searchDat;
 	memset(&searchDat, 0, sizeof(MY_STUDENT));
 	searchDat.year = year;
@@ -163,8 +173,9 @@ void find_year()
 
 	if (pDat)
 	{
-		printf("Znaleziono : \n");
+		printf("Znaleziono: \n");
 		MY_DATA_Print(pDat);
+		printf("\n");
 	}
 
 	while (pDat)
@@ -172,8 +183,9 @@ void find_year()
 		pDat = MY_STACK_Search(&searchDat, MY_DATA_SearchYear, 0);
 		if (pDat)
 		{
-			printf("Znaleziono : \n");
+			printf("Znaleziono: \n");
 			MY_DATA_Print(pDat);
+			printf("\n");
 		}
 	}
 }
@@ -182,8 +194,9 @@ void find_course()
 {
 	print_courses();
 	enum COURSES course;
-	printf("Szukany kurs: \n");
+	printf("Szukany kurs: ");
 	scanf_s("%d", &course);
+	printf("\n");
 	MY_STUDENT searchDat;
 	memset(&searchDat, 0, sizeof(MY_STUDENT));
 	searchDat.course = course;
@@ -192,8 +205,9 @@ void find_course()
 
 	if (pDat)
 	{
-		printf("Znaleziono : \n");
+		printf("Znaleziono: \n");
 		MY_DATA_Print(pDat);
+		printf("\n");
 	}
 
 	while (pDat)
@@ -201,8 +215,9 @@ void find_course()
 		pDat = MY_STACK_Search(&searchDat, MY_DATA_SearchCourse, 0);
 		if (pDat)
 		{
-			printf("Znaleziono : \n");
+			printf("Znaleziono: \n");
 			MY_DATA_Print(pDat);
+			printf("\n");
 		}
 	}
 }
@@ -218,15 +233,9 @@ void print_courses()
 
 void load()
 {
-	//char file[64];
-	//printf("Nazwa pliku wejsciowego z rozszerzeniem: ");
-	//scanf_s("%s", file);
 	MY_STACK_Load();
 }
 void save()
 {
-	//char file[64];
-	//printf("Nazwa pliku wyjsciowego z rozszerzeniem: ");
-	//scanf_s("%s", file);
 	MY_STACK_Save();
 }

@@ -4,6 +4,7 @@
 
 enum MY_INTERF_EN
 {
+	INTERF_PRINT,
 	INTERF_PUSH,
 	INTERF_POP,
 	INTERF_CLEAR,
@@ -22,7 +23,8 @@ enum DATA_VAR
 	DATA_VAR_TOT
 };
 
-void menu();
+void menu(); 
+void print_stack();
 void push();
 void pop();
 void clear();

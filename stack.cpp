@@ -4,16 +4,37 @@
 #include "errors.h"
 #pragma warning (disable : 4996)
 static MY_STACK* first = NULL;   // Wskaznik do elementu na szczycie stosu
-FreeData ptr_free_dat;           // Deklaracja wskaznika do funkcji typu FreeData
+char binFile[] = "dane.bin"; // nazwa pliku do ktorego beda zapisywane/pobierane dane
+
+// wskazniki do funkcji zaleznych od data
+FreeData ptr_free_dat;           
 SaveData ptr_save_dat;
 LoadData ptr_load_dat;
+PrintData ptr_print_dat;
 
-void MY_STACK_Init(FreeData pFreeDat, SaveData pSaveDat, LoadData pLoadDat)
+void MY_STACK_Init(FreeData pFreeDat, SaveData pSaveDat, LoadData pLoadDat, PrintData pPrintDat)
 {
 	first = NULL;
 	ptr_free_dat = pFreeDat;
 	ptr_save_dat = pSaveDat;
 	ptr_load_dat = pLoadDat;
+	ptr_print_dat = pPrintDat;
+}
+
+void MY_STACK_Print()
+{
+	MY_STACK* temp = first;
+	if (temp)
+	{
+		printf("--------------STOS--------------\n");
+		while (temp)
+		{
+			ptr_print_dat(temp->pData);
+			printf("--------------------------------\n");
+			temp = temp->next;
+		}
+	}
+	else printf("Stos jest pusty\n");
 }
 
 MY_STACK* MY_STACK_Push(void* pdat)
@@ -56,7 +77,7 @@ MY_STACK MY_STACK_Pop()
 		rv.pData = first->pData;
 		free(first);
 		first = next;
-		printf("Pobrano element\n");
+		printf("Pobrano element: \n");
 	}
 	return rv;
 }
@@ -139,7 +160,7 @@ void MY_STACK_Save()
 	if (!file_desc)
 		MyExit(NULL, file_desc);
 
-	FILE* pf = fopen("dane.bin", "wb");
+	FILE* pf = fopen(binFile, "wb");
 	if (!pf)
 		MyExit(pf, file_desc);
 
@@ -178,7 +199,7 @@ void MY_STACK_Load()
 	unsigned int no_items = 0, it, rec;
 	__int64* file_desc = NULL;
 
-	FILE* pf = fopen("dane.bin", "rb");
+	FILE* pf = fopen(binFile, "rb");
 	if (!pf) 
 		MyExit(pf, file_desc);
 
